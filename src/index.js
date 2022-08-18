@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './App';
-import StarwarsProvider from './Context/starwarsProvider';
+import StarwarsProvider from './Context/StarwarsProvider';
 
 render(
   <StarwarsProvider>
