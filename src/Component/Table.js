@@ -3,10 +3,11 @@ import React, { useContext } from 'react';
 import StarwarsContext from '../Context/StarwarsContext';
 
 function Table() {
-  const { planets } = useContext(StarwarsContext);
+  const { filterResults } = useContext(StarwarsContext);
   return (
     <div>
       <h3>Table</h3>
+
       <table width="1000" align="center" border="1">
         <thead>
           <tr>
@@ -26,7 +27,7 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          {planets.map((element) => (
+          {filterResults.map((element) => (
 
             <tr key={ element.name }>
               <td>{element.name}</td>

@@ -6,19 +6,33 @@ import StarwarsContext from './StarwarsContext';
 
 function StarwarsProvider({ children }) {
   const [planets, setPlanets] = useState([]);
+  const [filterName, setFilterName] = useState({ filterByName: { name: '' } });
+  const [filterResults, setFilterResults] = useState([]);
 
   useEffect(() => {
     const requestPlanets = async () => {
       const data = await fetchApiPlanetList();
       data.forEach((planet) => { delete planet.residents; });
-      console.log(data);
+      // console.log(data);
       setPlanets(data);
+      setFilterResults(data);
     };
     requestPlanets();
   }, []);
 
+  function handleChangeFilter(name) {
+    setFilterName(name);
+    const filterPlanetName = planets
+      .filter((planeta) => planeta.name.toLowerCase().includes(name.toLowerCase()));
+    console.log(name);
+    setFilterResults(filterPlanetName);
+  }
+
   const context = {
     planets,
+    handleChangeFilter,
+    filterName,
+    filterResults,
   };
 
   return (
