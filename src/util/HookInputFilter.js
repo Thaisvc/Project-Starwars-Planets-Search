@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import StarwarsContext from '../Context/StarwarsContext';
 
-function InputText() {
-  const { handleChange } = useContext(StarwarsContext);
+function InputFilter() {
+  const { handleChangeFilter } = useContext(StarwarsContext);
   return (
     <div>
       <label htmlFor="input1">
@@ -10,11 +10,11 @@ function InputText() {
           name="text"
           data-testid="name-filter"
           placeholder="Pesquise pelo planeta"
-          onChange={ (e) => handleChange(e.target.value) }
+          onChange={ (e) => handleChangeFilter(e.target.value) }
         />
       </label>
     </div>
   );
 }
 
-export default InputText;
+export default InputFilter;

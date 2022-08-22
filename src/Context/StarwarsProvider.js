@@ -49,9 +49,9 @@ function StarwarsProvider({ children }) {
       if (comparison === 'igual a') {
         return Number(planet[column]) === Number(value);
       }
-      return planet;
+      return planet; // console.log( planet);
     });
-    setPlanets(fieldsValue);
+    setFilterResults(fieldsValue);
   }
   const context = {
     planets,
