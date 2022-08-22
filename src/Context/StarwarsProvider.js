@@ -28,11 +28,38 @@ function StarwarsProvider({ children }) {
     setFilterResults(filterPlanetName);
   }
 
+  const [filterByNumericValues, setFilterByNumericValues] = useState(
+    {
+      column: 'population',
+      comparison: 'maior que',
+      value: 0,
+    },
+  );
+
+  function handleFilter() {
+    const { comparison, column, value } = filterByNumericValues;
+
+    const fieldsValue = planets.filter((planet) => {
+      if (comparison === 'maior que') {
+        return Number(planet[column]) > Number(value);
+      }
+      if (comparison === 'menor que') {
+        return Number(planet[column]) < Number(value);
+      }
+      if (comparison === 'igual a') {
+        return Number(planet[column]) === Number(value);
+      }
+      return planet;
+    });
+    setPlanets(fieldsValue);
+  }
   const context = {
     planets,
     handleChangeFilter,
     filterName,
     filterResults,
+    handleFilter,
+    setFilterByNumericValues,
   };
 
   return (
