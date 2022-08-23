@@ -84,7 +84,7 @@ function Table() {
                 <td>{planet.edited}</td>
                 <td>{planet.url}</td>
               </tr>
-            ))}
+            )).filter((chave) => chave !== 'residents')}
         </tbody>
       </table>
     </div>
