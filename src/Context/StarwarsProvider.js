@@ -1,32 +1,14 @@
-// import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import fetchApiPlanetList from '../Service/planetsAPI';
 import StarwarsContext from './StarwarsContext';
+import getPlanets from '../Service/planetsAPI';
 
 function StarwarsProvider({ children }) {
   const [planets, setPlanets] = useState([]);
-  const [filterName, setFilterName] = useState({ filterByName: { name: '' } });
-  const [filterResults, setFilterResults] = useState([]);
-
-  useEffect(() => {
-    const requestPlanets = async () => {
-      const data = await fetchApiPlanetList();
-      data.forEach((planet) => { delete planet.residents; });
-      // console.log(data);
-      setPlanets(data);
-      setFilterResults(data);
-    };
-    requestPlanets();
-  }, []);
-
-  function handleChangeFilter(name) {
-    setFilterName(name);
-    const filterPlanetName = planets
-      .filter((planeta) => planeta.name.toLowerCase().includes(name.toLowerCase()));
-    console.log(name);
-    setFilterResults(filterPlanetName);
-  }
+  const [filterByName, setFilterByName] = useState({
+    name: '',
+  });
+  // const [filterResults, setFilterResults] = useState([]);
 
   const [filterByNumericValues, setFilterByNumericValues] = useState(
     {
@@ -36,9 +18,16 @@ function StarwarsProvider({ children }) {
     },
   );
 
+  function handleChangeFilter(name) {
+    setFilterByName(name);
+    const filterPlanetName = planets
+      .filter((planeta) => planeta.name.toLowerCase().includes(name.toLowerCase()));
+    console.log(filterPlanetName);
+    setPlanets(filterPlanetName);
+  }
+
   function handleFilter() {
     const { comparison, column, value } = filterByNumericValues;
-
     const fieldsValue = planets.filter((planet) => {
       if (comparison === 'maior que') {
         return Number(planet[column]) > Number(value);
@@ -49,22 +38,40 @@ function StarwarsProvider({ children }) {
       if (comparison === 'igual a') {
         return Number(planet[column]) === Number(value);
       }
-      return planet; // console.log( planet);
+      return planet;
     });
-    setFilterResults(fieldsValue);
+    setPlanets(fieldsValue);
   }
-  const context = {
-    planets,
-    handleChangeFilter,
-    filterName,
-    filterResults,
-    handleFilter,
-    setFilterByNumericValues,
-  };
+
+  useEffect(() => {
+    const fetchPlanets = async () => {
+      const dataResult = await getPlanets();
+      const filterResult = dataResult
+        .map((element) => {
+          delete (element.residents);
+          return element;
+        });
+
+      setPlanets(filterResult);
+    };
+    return fetchPlanets();
+  }, []);
 
   return (
-    <StarwarsContext.Provider value={ context }>
-      { children }
+    <StarwarsContext.Provider
+      value={ {
+        planets,
+        setPlanets,
+        filterByName,
+        setFilterByName,
+        handleFilter,
+        filterByNumericValues,
+        // filterResults,
+        setFilterByNumericValues,
+        handleChangeFilter,
+      } }
+    >
+      {children}
     </StarwarsContext.Provider>
   );
 }
@@ -72,4 +79,5 @@ function StarwarsProvider({ children }) {
 StarwarsProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
 export default StarwarsProvider;
