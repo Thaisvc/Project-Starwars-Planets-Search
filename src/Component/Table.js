@@ -4,7 +4,7 @@ import TableContext from '../Context/StarwarsContext';
 function Table() {
   const {
     planets,
-    filterByName,
+    filterText,
     setFilterByName,
     filterByNumericValues,
     setFilterByNumericValues,
@@ -27,7 +27,7 @@ function Table() {
       <label htmlFor="inputText">
         <input
           type="text"
-          value={ filterByName.name }
+          value={ filterText.name }
           onChange={ handleChange }
           name="inputText"
           data-testid="name-filter"

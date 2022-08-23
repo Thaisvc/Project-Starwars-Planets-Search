@@ -5,9 +5,7 @@ import getPlanets from '../Service/planetsAPI';
 
 function StarwarsProvider({ children }) {
   const [planets, setPlanets] = useState([]);
-  const [filterByName, setFilterByName] = useState({
-    name: '',
-  });
+  const [filterText, setFilterText] = useState({ filterByName: { name: '' } });
   // const [filterResults, setFilterResults] = useState([]);
 
   const [filterByNumericValues, setFilterByNumericValues] = useState(
@@ -18,13 +16,13 @@ function StarwarsProvider({ children }) {
     },
   );
 
-  function handleChangeFilter(name) {
-    setFilterByName(name);
+  const handleChangeFilter = (name) => {
+    setFilterText(name);
+
     const filterPlanetName = planets
       .filter((planeta) => planeta.name.toLowerCase().includes(name.toLowerCase()));
-    console.log(filterPlanetName);
     setPlanets(filterPlanetName);
-  }
+  };
 
   function handleFilter() {
     const { comparison, column, value } = filterByNumericValues;
@@ -62,8 +60,7 @@ function StarwarsProvider({ children }) {
       value={ {
         planets,
         setPlanets,
-        filterByName,
-        setFilterByName,
+        filterText,
         handleFilter,
         filterByNumericValues,
         // filterResults,

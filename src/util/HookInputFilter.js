@@ -7,10 +7,11 @@ function InputFilter() {
     <div>
       <label htmlFor="input1">
         <input
-          name="text"
+          type="text"
+          onChange={ ({ target: { value } }) => handleChangeFilter(value) }
+          name="inputText"
           data-testid="name-filter"
-          placeholder="Pesquise pelo planeta"
-          onChange={ (e) => handleChangeFilter(e.target.value) }
+          placeholder="search"
         />
       </label>
     </div>
