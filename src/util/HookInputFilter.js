@@ -11,7 +11,6 @@ function InputFilter() {
           onChange={ ({ target: { value } }) => handleChangeFilter(value) }
           name="inputText"
           data-testid="name-filter"
-          placeholder="search"
         />
       </label>
     </div>

@@ -68,23 +68,23 @@ function Table() {
         </thead>
         <tbody>
           {planets
-            .map((planet, index) => (
+            .map((element, index) => (
               <tr key={ index }>
-                <td>{planet.name}</td>
-                <td>{planet.rotation_period}</td>
-                <td>{planet.orbital_period}</td>
-                <td>{planet.diameter}</td>
-                <td>{planet.climate}</td>
-                <td>{planet.gravity}</td>
-                <td>{planet.terrain}</td>
-                <td>{planet.surface_water}</td>
-                <td>{planet.population}</td>
-                <td>{planet.films}</td>
-                <td>{planet.created}</td>
-                <td>{planet.edited}</td>
-                <td>{planet.url}</td>
+                <td>{element.name}</td>
+                <td>{element.rotation_period}</td>
+                <td>{element.orbital_period}</td>
+                <td>{element.diameter}</td>
+                <td>{element.climate}</td>
+                <td>{element.gravity}</td>
+                <td>{element.terrain}</td>
+                <td>{element.surface_water}</td>
+                <td>{element.population}</td>
+                <td>{element.films}</td>
+                <td>{element.created}</td>
+                <td>{element.edited}</td>
+                <td>{element.url}</td>
               </tr>
-            )).filter((chave) => chave !== 'residents')}
+            )).filter((key) => key !== 'residents')}
         </tbody>
       </table>
     </div>
