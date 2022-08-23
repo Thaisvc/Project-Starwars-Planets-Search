@@ -4,17 +4,11 @@ import TableContext from '../Context/StarwarsContext';
 function Table() {
   const {
     planets,
-    filterText,
-    setFilterByName,
     filterByNumericValues,
     setFilterByNumericValues,
     handleFilter,
 
   } = useContext(TableContext);
-
-  const handleChange = ({ target }) => {
-    setFilterByName({ name: target.value });
-  };
 
   const handleChangeFilter = ({ target }) => {
     const { name, value } = target;
@@ -24,16 +18,6 @@ function Table() {
   return (
     <div>
       <h3>Star Wars Project</h3>
-      <label htmlFor="inputText">
-        <input
-          type="text"
-          value={ filterText.name }
-          onChange={ handleChange }
-          name="inputText"
-          data-testid="name-filter"
-          placeholder="search"
-        />
-      </label>
       <select data-testid="column-filter" onChange={ handleChangeFilter } name="column">
         Coluna
         <option>population</option>
