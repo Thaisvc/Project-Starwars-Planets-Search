@@ -1,4 +1,3 @@
-/* eslint-disable */ 
 import React, { useContext, useEffect, useState } from 'react';
 import PlanetsContext from '../Context/StarwarsContext';
 import fetchPlanets from '../Service/planetsAPI';
