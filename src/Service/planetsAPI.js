@@ -1,20 +1,11 @@
-const URL = 'https://swapi-trybe.herokuapp.com/api/planets/';
-
-async function fetchApiPlanetList() {
+const fetchPlanets = async () => {
   try {
-    const response = await fetch(URL);
-    const data = await response.json();
-    // console.log(data.results);
-    return data.results;
+    const response = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
+    const { results } = await response.json();
+    return results;
   } catch (error) {
-    console.log(error);
+    return error;
   }
-}
+};
 
-export default fetchApiPlanetList;
-
-/* {
-  const keys = Object.keys(data);
-  keys.filter((element) => element !== 'residents');
-  console.log('keys', keys);
-}); */
+export default fetchPlanets;
